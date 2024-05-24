@@ -3,9 +3,22 @@ import {config} from "dotenv"
 import morgan from 'morgan'
 import appRouter from './routes/index.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 config();
+
 const app = express();
+
+
+const allowedOrigins = ['http://localhost:3000/api/v1/user/login'];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
+
+
+app.use(express.json());
+
 
 //middleware
 app.use(express.json());
